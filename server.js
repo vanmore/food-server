@@ -24,13 +24,14 @@ app.use(bodyParser.json());
 
 app.post('/events', authenticateRestaurant, eventsController.create);
 app.get('/events', eventsController.getAll);
+app.get('/events/:id', eventsController.getEvent);
+app.patch('/events/:id/subscribe', eventsController.subscribe);
 
 
 // POST /users
 app.post('/users', usersController.create);
 app.get('/users/me', authenticate, usersController.getUser);
 app.post('/users/login', usersController.login);
-
 app.delete('/users/logout', authenticate, usersController.logout);
 
 

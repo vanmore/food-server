@@ -27,15 +27,8 @@ exports.login = (req, res) => {
 
   User.findByCredentials(body.email, body.password).then((user) => {
     return user.generateAuthToken().then((token) => {
-        console.log('fuck');
-        // user = fuck;
-        console.log('first');
-        // user['x-auth'] = token;
-        console.log('last');
-        // usertemp = user.toJSON();
         usertemp = user.toObject();
         usertemp["xauth"] = token;
-        // usertemp = JSON.stringify(usertemp);
 
       res.header('x-auth', token).send( _.pick(usertemp, ['_id', 'email', 'xauth']));
     });
@@ -45,9 +38,12 @@ exports.login = (req, res) => {
 }
 
 exports.logout = (req, res) => {
-    req.user.removeToken(req.token).then(() => {
-      res.status(200).send();
-    }, () => {
-      res.status(400).send();
-    });
-  }
+  token = req.header('x-auth');
+  console.log(token);
+  res.status(200).send();
+    // req.user.removeToken(req.token).then(() => {
+    //   res.status(200).send();
+    // }, () => {
+    //   res.status(400).send();
+    // });
+  };

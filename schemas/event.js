@@ -15,21 +15,25 @@ var EventSchema = new mongoose.Schema({
     },
     restId: {
         type: String
-    },  
+    },
     img: {
-       type: String 
+       type: String
     },
     date: {
         type: String
-    }, 
+    },
     price: {
-       type: Number 
+       type: Number
     },
     rating: {
         type: String
     },
     comments: [
-        
+      {
+        text: String,
+        _author: mongoose.Schema.Types.ObjectId
+      }
+
     ]
 });
 
